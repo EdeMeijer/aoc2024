@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Aoc2024.Days;
+using Aoc2024.Lib;
+
+Runner.Run<Day01>();
