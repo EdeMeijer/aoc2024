@@ -62,8 +62,7 @@ public sealed class Day02 : IDay
                 return false;
             }
 
-            var diff = Math.Abs(levels[i] - levels[i - 1]);
-            if (diff is < 1 or > 3)
+            if (Math.Abs(levels[i] - levels[i - 1]) is < 1 or > 3)
             {
                 return false;
             }
