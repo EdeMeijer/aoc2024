@@ -2,9 +2,7 @@ namespace Aoc2024.Lib;
 
 internal static class FileInputReader
 {
-    internal static string Text(int day) => File.ReadAllText(FileFor(day));
-
-    internal static string[] Lines(int day) => File.ReadAllLines(FileFor(day));
+    internal static string Text(int day) => File.ReadAllText(FileFor(day)).TrimEnd();
 
     private static string FileFor(int day)
     {
@@ -16,5 +14,5 @@ internal static class FileInputReader
 internal class FileInput(int day) : IInput
 {
     public string Text => FileInputReader.Text(day);
-    public IReadOnlyCollection<string> Lines => FileInputReader.Lines(day);
+    public IReadOnlyCollection<string> Lines => Text.Split(Environment.NewLine);
 }
