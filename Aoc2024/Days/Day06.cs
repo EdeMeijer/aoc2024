@@ -58,14 +58,10 @@ public sealed class Day06 : IDay
             });
     }
 
-    private static void Simulate(
-        Scenario scenario,
-        out ISet<Vec2D> visited,
-        out bool isLoop
-    )
+    private static void Simulate(Scenario scenario, out ISet<Vec2D> visited, out bool isLoop)
     {
         visited = new HashSet<Vec2D>();
-        var visitedDirs = new Dictionary<Vec2D, HashSet<Vec2D>>();
+        var visitedWithDirs = new HashSet<(Vec2D, Vec2D)>();
         isLoop = false;
 
         var guard = scenario.Guard;
@@ -73,12 +69,8 @@ public sealed class Day06 : IDay
 
         while (guard.X >= 0 && guard.X < scenario.Width && guard.Y >= 0 && guard.Y < scenario.Height)
         {
-            if (visited.Add(guard))
-            {
-                visitedDirs.Add(guard, []);
-            }
-
-            if (!visitedDirs[guard].Add(guardDir))
+            visited.Add(guard);
+            if (!visitedWithDirs.Add((guard, guardDir)))
             {
                 isLoop = true;
                 break;
