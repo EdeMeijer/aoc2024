@@ -14,5 +14,5 @@ internal static class FileInputReader
 internal class FileInput(int day) : IInput
 {
     public string Text => FileInputReader.Text(day);
-    public IReadOnlyCollection<string> Lines => Text.Split(Environment.NewLine);
+    public IList<string> Lines => Text.Split(Environment.NewLine);
 }

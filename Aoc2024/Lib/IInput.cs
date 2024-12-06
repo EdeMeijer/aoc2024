@@ -4,5 +4,5 @@ public interface IInput
 {
     string Text { get; }
     
-    IReadOnlyCollection<string> Lines { get; }
+    IList<string> Lines { get; }
 }
