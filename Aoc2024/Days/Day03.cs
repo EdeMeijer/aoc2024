@@ -9,7 +9,7 @@ public sealed class Day03 : IDay
     private const string TestInput2 = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))";
 
     [Example(TestInput1, 161)]
-    public int Part1(IInput input)
+    public long Part1(IInput input)
     {
         var pattern = new Regex(@"mul\((\d{1,3}),(\d{1,3})\)");
         var result = 0;
@@ -22,7 +22,7 @@ public sealed class Day03 : IDay
     }
 
     [Example(TestInput2, 48)]
-    public int Part2(IInput input)
+    public long Part2(IInput input)
     {
         var pattern = new Regex(@"(do(?:n't)?\(\))|(?:mul\((\d{1,3}),(\d{1,3})\))");
         var result = 0;

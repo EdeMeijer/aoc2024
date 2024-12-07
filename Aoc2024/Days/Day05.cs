@@ -37,7 +37,7 @@ public class Day05 : IDay
         """;
 
     [Example(TestInput, 143)]
-    public int Part1(IInput input)
+    public long Part1(IInput input)
     {
         return LoadAndSortUpdates(input.Text)
             .Where(tup => tup.update.SequenceEqual(tup.sorted))
@@ -45,7 +45,7 @@ public class Day05 : IDay
     }
 
     [Example(TestInput, 123)]
-    public int Part2(IInput input)
+    public long Part2(IInput input)
     {
         return LoadAndSortUpdates(input.Text)
             .Where(tup => !tup.update.SequenceEqual(tup.sorted))

@@ -31,10 +31,11 @@ public static class Runner
         try
         {
             // Run examples first
+            var examplesPassed = true;
             foreach (var (example, i) in method.GetCustomAttributes<ExampleAttribute>().Select((attr, i) => (attr, i)))
             {
                 var input = new ExampleInput(example.Input);
-                var result = (int)method.Invoke(day, [input])!;
+                var result = (long)method.Invoke(day, [input])!;
                 if (result == example.Result)
                 {
                     Console.WriteLine($"Example {i + 1} passed");
@@ -42,10 +43,16 @@ public static class Runner
                 else
                 {
                     Console.WriteLine($"Example {i + 1} failed! Expected {example.Result}, got {result}");
+                    examplesPassed = false;
                 }
             }
 
-            var realResult = (int)method.Invoke(day, [realInput])!;
+            if (!examplesPassed)
+            {
+                return;
+            }
+
+            var realResult = (long)method.Invoke(day, [realInput])!;
             Console.WriteLine($"Result = {realResult}");
         }
         catch (TargetInvocationException ex)
