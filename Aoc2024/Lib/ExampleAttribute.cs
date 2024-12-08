@@ -1,6 +1,6 @@
 namespace Aoc2024.Lib;
 
-[AttributeUsage(AttributeTargets.Method)]
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
 public sealed class ExampleAttribute(string input, int result) : Attribute
 {
     public string Input => input;

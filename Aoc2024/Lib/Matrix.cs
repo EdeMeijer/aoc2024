@@ -12,17 +12,21 @@ public interface IMatrix<T> : IEquatable<IMatrix<T>> where T : IEquatable<T>
 
     T this[int y, int x] { get; set; }
 
+    T this[Vec2D coord] { get; set; }
+
     IEnumerable<T> Row(int y);
 
     IEnumerable<T> Col(int x);
 
-    IEnumerable<(int y, int x)> Coords { get; }
+    IEnumerable<Vec2D> Coords { get; }
 
     IMatrix<T> Clone();
 
     IMatrix<T> With(int y, int x, T value);
 
     bool Contains(int y, int x);
+    
+    bool Contains(Vec2D coord);
 
     IMatrix<T> RotateCw();
 
@@ -52,6 +56,12 @@ public abstract class AbstractMatrix<T> : IMatrix<T> where T : IEquatable<T>
 
     public abstract T this[int y, int x] { get; set; }
 
+    public T this[Vec2D coord]
+    {
+        get => this[coord.Y, coord.X];
+        set => this[coord.Y, coord.X] = value;
+    }
+
     public IEnumerable<T> Row(int y)
     {
         for (var x = 0; x < Width; x++)
@@ -68,7 +78,7 @@ public abstract class AbstractMatrix<T> : IMatrix<T> where T : IEquatable<T>
         }
     }
 
-    public IEnumerable<(int y, int x)> Coords
+    public IEnumerable<Vec2D> Coords
     {
         get
         {
@@ -76,7 +86,7 @@ public abstract class AbstractMatrix<T> : IMatrix<T> where T : IEquatable<T>
             {
                 for (var x = 0; x < Width; x++)
                 {
-                    yield return (y, x);
+                    yield return new Vec2D(y, x);
                 }
             }
         }
@@ -92,6 +102,8 @@ public abstract class AbstractMatrix<T> : IMatrix<T> where T : IEquatable<T>
     }
 
     public bool Contains(int y, int x) => y >= 0 && x >= 0 && y < Height && x < Width;
+    
+    public bool Contains(Vec2D coord) => Contains(coord.Y, coord.X);
 
     public IMatrix<T> RotateCw() => new RotatedMatrix<T>(this);
 
