@@ -1,4 +1,5 @@
 using Aoc2024.Lib;
+using Aoc2024.Lib.Matrix;
 
 namespace Aoc2024.Days;
 
