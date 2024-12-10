@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Aoc2024.Lib.Matrix;
 
-public abstract class AbstractMatrix<T> : IMatrix<T> where T : IEquatable<T>
+public abstract class AbstractMatrix<T> : IMatrix<T> 
 {
     public abstract int Height { get; }
     public abstract int Width { get; }

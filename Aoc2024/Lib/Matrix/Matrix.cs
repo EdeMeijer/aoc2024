@@ -1,6 +1,6 @@
 namespace Aoc2024.Lib.Matrix;
 
-public sealed class Matrix<T> : AbstractMatrix<T> where T : IEquatable<T>
+public sealed class Matrix<T> : AbstractMatrix<T>
 {
     private readonly List<T> _values;
 

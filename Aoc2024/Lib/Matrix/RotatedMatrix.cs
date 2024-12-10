@@ -1,6 +1,6 @@
 namespace Aoc2024.Lib.Matrix;
 
-public sealed class RotatedMatrix<T> : AbstractMatrix<T> where T : IEquatable<T>
+public sealed class RotatedMatrix<T> : AbstractMatrix<T>
 {
     private readonly IMatrix<T> _inner;
 

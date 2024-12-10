@@ -1,6 +1,6 @@
 namespace Aoc2024.Lib.Matrix;
 
-public interface IMatrix<T> : IEquatable<IMatrix<T>> where T : IEquatable<T>
+public interface IMatrix<T> : IEquatable<IMatrix<T>>
 {
     int Height { get; }
 
