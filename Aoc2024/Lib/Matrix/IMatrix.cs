@@ -1,5 +1,13 @@
 namespace Aoc2024.Lib.Matrix;
 
+public static class MatrixExtensions
+{
+    public static Matrix<TO> Map<TI, TO>(this IMatrix<TI> matrix, Func<TI, TO> mapper)
+    {
+        return new Matrix<TO>(matrix.Height, matrix.Width, matrix.Values.Select(mapper));
+    }
+}
+
 public interface IMatrix<T> : IEquatable<IMatrix<T>>
 {
     int Height { get; }
