@@ -8,6 +8,7 @@ public readonly record struct Vec2D(int Y, int X)
     public static Vec2D operator -(Vec2D a) => new(-a.Y, -a.X);
 
     public Vec2D RotateCw() => new(X, -Y);
+    public Vec2D RotateCcw() => new(-X, Y);
 }
 
 public readonly record struct Vec2DL(long Y, long X)

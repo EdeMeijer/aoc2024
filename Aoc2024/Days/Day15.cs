@@ -43,19 +43,6 @@ public sealed class Day15 : IDay
         ^^>vv<^v^v<vv>^<><v<^v>^^^>>>^^vvv^>vvv<>>>^<^>>>>>^<<^v>^vvv<>^<><<v>
         v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^
         """;
-    
-    private const string TestInput3 =
-        """
-        #######
-        #...#.#
-        #.....#
-        #..OO@#
-        #..O..#
-        #.....#
-        #######
-        
-        <vv<<^^<<^^
-        """;
 
     [Example(TestInput1, 2028)]
     [Example(TestInput2, 10092)]
