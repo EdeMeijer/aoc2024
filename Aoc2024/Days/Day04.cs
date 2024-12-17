@@ -34,7 +34,7 @@ public sealed class Day04 : IDay
         """;
 
     [Example(TestInput1, 18)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         var m = Matrix.Parse(input.Text);
 
@@ -72,7 +72,7 @@ public sealed class Day04 : IDay
     }
 
     [Example(TestInput2, 9)]
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         var m = Matrix.Parse(input.Text);
         var result = 0;

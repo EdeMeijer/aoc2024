@@ -28,7 +28,7 @@ public sealed class Day10 : IDay
 
     [Example(TestInput1, 1)]
     [Example(TestInput2, 36)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         var heightMap = Matrix.Parse(input.Text, c => int.Parse(c.ToString()));
 
@@ -76,7 +76,7 @@ public sealed class Day10 : IDay
     }
 
     [Example(TestInput2, 81)]
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         var heightMap = Matrix.Parse(input.Text, c => int.Parse(c.ToString()));
 

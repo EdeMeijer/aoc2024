@@ -29,14 +29,14 @@ public sealed class Day06 : IDay
     );
 
     [Example(TestInput, 41)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         Simulate(LoadInitialScenario(input), out var visited, out _);
         return visited.Count;
     }
 
     [Example(TestInput, 6)]
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         var scenario = LoadInitialScenario(input);
         // Obtain default path to get a list of candidate positions for additional obstruction

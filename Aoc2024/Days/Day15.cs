@@ -46,7 +46,7 @@ public sealed class Day15 : IDay
 
     [Example(TestInput1, 2028)]
     [Example(TestInput2, 10092)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         var parts = input.Text.Split("\n\n");
         var map = Matrix.Parse(parts[0]);
@@ -104,7 +104,7 @@ public sealed class Day15 : IDay
     }
 
     [Example(TestInput2, 9021)]
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         var parts = input.Text.Split("\n\n");
         var map = Matrix.Parse(parts[0]);

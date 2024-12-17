@@ -5,11 +5,6 @@ namespace Aoc2024.Lib;
 
 public static class Runner
 {
-    static Runner()
-    {
-        var part1Fn = typeof(IDay).GetMethod(nameof(IDay.Part1));
-    }
-
     public static void Run<TDay>() where TDay : IDay
     {
         Run<TDay>(1);
@@ -37,7 +32,13 @@ public static class Runner
             {
                 var input = new ExampleInput(example.Input);
                 var result = Invoke(day, input, part);
-                if (result == example.Result)
+                var expected = example.Result;
+                if (result is long && expected is int)
+                {
+                    expected = (long)(int)expected;
+                }
+                
+                if (Equals(result, expected))
                 {
                     Console.WriteLine($"Example {i + 1} passed");
                 }
@@ -95,8 +96,8 @@ public static class Runner
         var avg = (double)sw.ElapsedMilliseconds / runs;
         Console.WriteLine($"Average run time = {avg} ms");
     }
-    
-    private static long Invoke(IDay day, IInput input, int part)
+
+    private static object Invoke(IDay day, IInput input, int part)
     {
         if (part == 1)
         {

@@ -36,7 +36,7 @@ public sealed class Day08 : IDay
         """;
 
     [Example(TestInput, 14)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         return Solve(input, (a, b) =>
         {
@@ -47,7 +47,7 @@ public sealed class Day08 : IDay
 
     [Example(TestInput, 34)]
     [Example(TestInput2, 9)]
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         return Solve(input, (a, b) =>
         {

@@ -51,7 +51,7 @@ public sealed class Day16 : IDay
 
     [Example(TestInput1, 7036)]
     [Example(TestInput2, 11048)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         ComputeShortestPaths(input, out var endPos, out var costs, out _);
         return Orientations.Min(o => costs[new Vertex(endPos, o)]);
@@ -59,7 +59,7 @@ public sealed class Day16 : IDay
 
     [Example(TestInput1, 45)]
     [Example(TestInput2, 64)]
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         ComputeShortestPaths(input, out var endPos, out var costs, out var prevs);
 

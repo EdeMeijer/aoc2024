@@ -58,7 +58,7 @@ public sealed class Day12 : IDay
     [Example(TestInput1, 140)]
     [Example(TestInput2, 1930)]
     [Example(TestInput3, 772)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         return Solve(input, segments => segments.Count);
     }
@@ -68,7 +68,7 @@ public sealed class Day12 : IDay
     [Example(TestInput3, 436)]
     [Example(TestInput4, 236)]
     [Example(TestInput5, 368)]
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         return Solve(input, segments =>
         {

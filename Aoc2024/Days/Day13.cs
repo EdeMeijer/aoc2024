@@ -30,12 +30,12 @@ public sealed class Day13 : IDay
     private sealed record Scenario(Vec2DL ButtonA, Vec2DL ButtonB, Vec2DL Prize);
 
     [Example(TestInput1, 480)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         return Solve(input, 0);
     }
 
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         return Solve(input, 10000000000000L);
     }

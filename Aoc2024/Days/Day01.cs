@@ -15,7 +15,7 @@ public sealed class Day01 : IDay
         """;
 
     [Example(ExampleInput, 11)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         var (left, right) = ParseInput(input);
         left.Sort();
@@ -31,7 +31,7 @@ public sealed class Day01 : IDay
     }
 
     [Example(ExampleInput, 31)]
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         var (left, right) = ParseInput(input);
         var leftCounts = CountValues(left);

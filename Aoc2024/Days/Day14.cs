@@ -27,7 +27,7 @@ public sealed class Day14 : IDay
     private sealed record Robot(Vec2D P, Vec2D V);
 
     [Example(TestInput1, 12)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         var area = input is ExampleInput ? new Vec2D(7, 11) : new Vec2D(103, 101);
 
@@ -67,7 +67,7 @@ public sealed class Day14 : IDay
         return quadrantSums.Aggregate((a, b) => a * b);
     }
 
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         var area = new Vec2D(103, 101);
 

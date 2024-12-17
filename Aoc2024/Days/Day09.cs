@@ -10,7 +10,7 @@ public sealed class Day09 : IDay
         """;
 
     [Example(TestInput, 1928)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         var sizes = input.Text.Trim().Select(c => int.Parse(c.ToString())).ToList();
         var initialTotalSize = sizes.Sum();
@@ -44,7 +44,7 @@ public sealed class Day09 : IDay
     }
 
     [Example(TestInput, 2858)]
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         var sizes = input.Text.Trim().Select(c => int.Parse(c.ToString())).ToList();
 

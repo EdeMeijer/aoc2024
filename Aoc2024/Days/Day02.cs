@@ -15,13 +15,13 @@ public sealed class Day02 : IDay
         """;
 
     [Example(ExampleInput, 2)]
-    public long Part1(IInput input)
+    public object Part1(IInput input)
     {
         return input.Lines.Count(line => IsSafe(line.Split(" ").Select(int.Parse).ToList()));
     }
 
     [Example(ExampleInput, 4)]
-    public long Part2(IInput input)
+    public object Part2(IInput input)
     {
         return input.Lines.Count(line => IsSafeDampened(line.Split(" ").Select(int.Parse).ToList()));
     }

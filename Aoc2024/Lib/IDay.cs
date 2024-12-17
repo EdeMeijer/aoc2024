@@ -2,7 +2,7 @@ namespace Aoc2024.Lib;
 
 public interface IDay
 {
-    long Part1(IInput input);
+    object Part1(IInput input);
 
-    long Part2(IInput input);
+    object Part2(IInput input);
 }
