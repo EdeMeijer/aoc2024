@@ -9,6 +9,8 @@ public readonly record struct Vec2D(int Y, int X)
 
     public Vec2D RotateCw() => new(X, -Y);
     public Vec2D RotateCcw() => new(-X, Y);
+
+    public int ManhattanNorm => Math.Abs(Y) + Math.Abs(X);
 }
 
 public readonly record struct Vec2DL(long Y, long X)

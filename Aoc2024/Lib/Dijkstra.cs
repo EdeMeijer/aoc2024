@@ -8,7 +8,19 @@ public static class Dijkstra
         Func<TNode, TNode, int> getDistance,
         out Dictionary<TNode, int> distances,
         out Dictionary<TNode, HashSet<TNode>> prevs
-    ) where TNode : notnull
+    )
+    {
+        Run(start, default, getNeighbors, getDistance, out distances, out prevs);
+    }
+    
+    public static void Run<TNode>(
+        TNode start,
+        TNode? end,
+        Func<TNode, IEnumerable<TNode>> getNeighbors,
+        Func<TNode, TNode, int> getDistance,
+        out Dictionary<TNode, int> distances,
+        out Dictionary<TNode, HashSet<TNode>> prevs
+    )
     {
         distances = new Dictionary<TNode, int>
         {
@@ -22,6 +34,12 @@ public static class Dijkstra
         {
             var next = todo.Dequeue();
             var nextCost = distances[next];
+
+            if (end != null && distances.ContainsKey(end) && distances[end] < nextCost)
+            {
+                // Found the solution to get to the target node
+                break;
+            }
 
             foreach (var neighbor in getNeighbors(next))
             {
