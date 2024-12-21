@@ -68,7 +68,7 @@ public sealed class Day18 : IDay
             }
         }
 
-        ComputeShortestPaths(
+        Dijkstra.Run(
             new Vec2D(0, 0),
             GetNeighbors,
             (a, b) => 1,
@@ -109,7 +109,7 @@ public sealed class Day18 : IDay
         foreach (var coord in coords)
         {
             map[coord] = false;
-            ComputeShortestPaths(
+            Dijkstra.Run(
                 new Vec2D(0, 0),
                 GetNeighbors,
                 (a, b) => 1,
@@ -124,44 +124,5 @@ public sealed class Day18 : IDay
         }
 
         throw new ApplicationException();
-    }
-
-    private void ComputeShortestPaths<TNode>(
-        TNode start,
-        Func<TNode, IEnumerable<TNode>> getNeighbors,
-        Func<TNode, TNode, int> getDistance,
-        out Dictionary<TNode, int> distances,
-        out Dictionary<TNode, HashSet<TNode>> prevs
-    ) where TNode : notnull
-    {
-        distances = new Dictionary<TNode, int>
-        {
-            [start] = 0
-        };
-        prevs = new Dictionary<TNode, HashSet<TNode>>();
-
-        var todo = new PriorityQueue<TNode, int>();
-        todo.Enqueue(start, 0);
-        while (todo.Count > 0)
-        {
-            var next = todo.Dequeue();
-            var nextCost = distances[next];
-
-            foreach (var neighbor in getNeighbors(next))
-            {
-                var cost = getDistance(next, neighbor);
-                var alt = nextCost + cost;
-                if (!distances.ContainsKey(neighbor) || alt < distances[neighbor])
-                {
-                    distances[neighbor] = alt;
-                    todo.Enqueue(neighbor, alt);
-                    prevs[neighbor] = [next];
-                }
-                else if (alt == distances[neighbor])
-                {
-                    prevs[neighbor].Add(next);
-                }
-            }
-        }
     }
 }

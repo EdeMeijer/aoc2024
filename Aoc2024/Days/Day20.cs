@@ -38,7 +38,7 @@ public sealed class Day20 : IDay
         return Solve(input, 20, threshold);
     }
 
-    public object Solve(IInput input, int maxCheatTime, int minSaved)
+    private static object Solve(IInput input, int maxCheatTime, int minSaved)
     {
         var map = Matrix.Parse(input.Text);
         var startPos = map.Coords.First(c => map[c] == 'S');
@@ -61,7 +61,7 @@ public sealed class Day20 : IDay
             }
         }
 
-        ComputeShortestPaths(startPos, GetNeighbors, (_, _) => 1, out var distances, out var prevs);
+        Dijkstra.Run(startPos, GetNeighbors, (_, _) => 1, out var distances, out _);
 
         int Cheat(Vec2D start, Vec2D end)
         {
@@ -98,44 +98,5 @@ public sealed class Day20 : IDay
 
         return GeneratePotentialCheats()
             .Count(cheat => Cheat(cheat.Start, cheat.End) >= minSaved);
-    }
-
-    private void ComputeShortestPaths<TNode>(
-        TNode start,
-        Func<TNode, IEnumerable<TNode>> getNeighbors,
-        Func<TNode, TNode, int> getDistance,
-        out Dictionary<TNode, int> distances,
-        out Dictionary<TNode, HashSet<TNode>> prevs
-    ) where TNode : notnull
-    {
-        distances = new Dictionary<TNode, int>
-        {
-            [start] = 0
-        };
-        prevs = new Dictionary<TNode, HashSet<TNode>>();
-
-        var todo = new PriorityQueue<TNode, int>();
-        todo.Enqueue(start, 0);
-        while (todo.Count > 0)
-        {
-            var next = todo.Dequeue();
-            var nextCost = distances[next];
-
-            foreach (var neighbor in getNeighbors(next))
-            {
-                var cost = getDistance(next, neighbor);
-                var alt = nextCost + cost;
-                if (!distances.ContainsKey(neighbor) || alt < distances[neighbor])
-                {
-                    distances[neighbor] = alt;
-                    todo.Enqueue(neighbor, alt);
-                    prevs[neighbor] = [next];
-                }
-                else if (alt == distances[neighbor])
-                {
-                    prevs[neighbor].Add(next);
-                }
-            }
-        }
     }
 }

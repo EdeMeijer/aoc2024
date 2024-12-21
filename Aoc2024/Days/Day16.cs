@@ -85,7 +85,7 @@ public sealed class Day16 : IDay
         return bestPathSet.Select(v => v.Position).ToHashSet().Count;
     }
 
-    private void ComputeShortestPaths(
+    private static void ComputeShortestPaths(
         IInput input,
         out Vec2D endPos,
         out Dictionary<Vertex, int> costs,
@@ -100,34 +100,13 @@ public sealed class Day16 : IDay
         map[endPos] = '.';
 
         var start = new Vertex(startPos, new Vec2D(0, 1));
-        costs = new Dictionary<Vertex, int>
-        {
-            [start] = 0
-        };
-        prevs = new Dictionary<Vertex, HashSet<Vertex>>();
 
-        var todo = new PriorityQueue<Vertex, int>();
-        todo.Enqueue(start, 0);
-        while (todo.Count > 0)
-        {
-            var next = todo.Dequeue();
-            var nextCost = costs[next];
+        Dijkstra.Run(start, GetNeighbors, GetCost, out costs, out prevs);
+        return;
 
-            foreach (var neighbor in GetNeighbors(next))
-            {
-                var cost = neighbor.Orientation != next.Orientation ? 1000 : 1;
-                var alt = nextCost + cost;
-                if (!costs.ContainsKey(neighbor) || alt < costs[neighbor])
-                {
-                    costs[neighbor] = alt;
-                    todo.Enqueue(neighbor, alt);
-                    prevs[neighbor] = [next];
-                }
-                else if (alt == costs[neighbor])
-                {
-                    prevs[neighbor].Add(next);
-                }
-            }
+        int GetCost(Vertex a, Vertex b)
+        {
+            return a.Orientation != b.Orientation ? 1000 : 1;
         }
 
         IEnumerable<Vertex> GetNeighbors(Vertex v)
