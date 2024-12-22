@@ -42,45 +42,51 @@ public sealed class Day22 : IDay
     [Example(TestInput2, 23)]
     public object Part2(IInput input)
     {
-        // Track the max number of bananas for each possible sequence, per monkey
-        var tracker = new Dictionary<string, Dictionary<int, int>>();
+        const int numPossibleDeltas = 19;
+        const int bufferSize = numPossibleDeltas * numPossibleDeltas * numPossibleDeltas * numPossibleDeltas;
+        
+        var results = new int[bufferSize];
+        var monkeyBitmap = new bool[bufferSize];
 
         foreach (var (line, m) in input.Lines.Select((line, i) => (line, i)))
         {
+            Array.Clear(monkeyBitmap);
             var s = long.Parse(line);
             var prevBananas = (int)(s % 10);
             var q = new Queue<int>();
+
+            var key = 0;
 
             for (var i = 0; i < 2000; i++)
             {
                 s = DeriveSecret(s);
 
                 var bananas = (int)(s % 10);
-                var delta = bananas - prevBananas;
+                var delta = bananas - prevBananas + 9;
+
+                key *= numPossibleDeltas;
+                key += delta;
 
                 q.Enqueue(delta);
                 if (q.Count == 5)
                 {
-                    q.Dequeue();
+                    key -= q.Dequeue() * bufferSize;
                 }
 
-                if (bananas > 0 && q.Count == 4)
+                if (i >= 3)
                 {
-                    var key = string.Join(',', q);
-                    if (!tracker.TryGetValue(key, out var firstPerMonkey))
+                    if (!monkeyBitmap[key])
                     {
-                        firstPerMonkey = new Dictionary<int, int>();
-                        tracker[key] = firstPerMonkey;
+                        monkeyBitmap[key] = true;
+                        results[key] += bananas;
                     }
-
-                    firstPerMonkey.TryAdd(m, bananas);
                 }
 
                 prevBananas = bananas;
             }
         }
 
-        return tracker.Values.Max(d => d.Values.Sum());
+        return results.Max();
     }
 
     private static long DeriveSecret(long s)
