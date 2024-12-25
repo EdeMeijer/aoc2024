@@ -37,6 +37,10 @@ public static class Runner
                 {
                     expected = (long)(int)expected;
                 }
+                if (result is ulong && expected is int)
+                {
+                    expected = (ulong)(int)expected;
+                }
                 
                 if (Equals(result, expected))
                 {
