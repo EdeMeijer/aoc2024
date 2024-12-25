@@ -61,9 +61,9 @@ public static class Runner
             var realResult = Invoke(day, realInput, part);
             Console.WriteLine($"Result = {realResult}");
         }
-        catch (TargetInvocationException ex)
+        catch (Exception ex)
         {
-            if (ex.InnerException is NotImplementedException)
+            if (ex is NotImplementedException)
             {
                 Console.WriteLine("Not implemented yet");
             }
